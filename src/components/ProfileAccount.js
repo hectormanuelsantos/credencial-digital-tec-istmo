@@ -1,13 +1,119 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Avatar } from 'react-native-elements';
+import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+
+import ApiConfig from '../api/ApiConfig';
+import { Api } from '../api/UrlApi';
+import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 
 const ProfileAccount = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [photografy, setphotografy] = useState(null);
+
+  const apiRequest = uri => {
+    let numero = '19190780';
+    let uriImage = uri;
+    ApiConfig.post('auth/local', {
+      identifier: username,
+      password: password,
+    })
+      .then(res => {
+        return res.data;
+      })
+      .then(user => {
+        const formData = new FormData();
+        formData.append(
+          'data',
+          JSON.stringify({
+            ncontrol: numero,
+          }),
+        );
+        let filename = numero + '-image.jpg';
+        formData.append('files.Foto', {
+          uri: uriImage,
+          name: filename,
+          type: 'image/jpeg',
+        });
+
+        if (user.jwt) {
+          const response = fetch(`${Api}/credenciales`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              Authorization: `Bearer ${user.jwt}`,
+            },
+          });
+          const data = response.json();
+          console.log('data', data);
+        }
+      });
+  };
+
+  const openImage = async () => {
+    const result = await loadImageFromGallery([1, 1]);
+    setphotografy(result);
+    Apirequest(result.image);
+  };
+
+  const takeImage = async () => {
+    const hasPermission = await askForPermission();
+    if (!hasPermission) {
+      return;
+    } else {
+      let image = await launchCameraAsync({
+        mediaTypes: MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [3, 3],
+        quality: 1,
+        base64: true,
+      });
+
+      setphotografy({ localUri: image.uri });
+      if (!image.cancelled) {
+        Apirequest(image.uri);
+      }
+    }
+  };
+
+  const list = [
+    {
+      title: <FontAwesome5 name='camera' size={24} color='black' />,
+      onPress: () => {
+        takeImage();
+        setIsVisible(false);
+      },
+    },
+    {
+      title: <MaterialIcons name='photo-library' size={24} color='black' />,
+      onPress: () => {
+        openImage();
+        setIsVisible(false);
+      },
+    },
+    {
+      title: 'Cancelar',
+      containerStyle: { backgroundColor: 'red' },
+      titleStyle: { color: 'white' },
+      onPress: () => setIsVisible(false),
+    },
+  ];
+
   return (
     <View style={[styles.containerContent, styles.mb20]}>
       <View style={[styles.photoProfile, styles.mb20]}>
-        <Avatar size={160} source={require('../assets/images/user.png')} />
+        <Avatar onPress={() => setIsVisible(true)} size={160} source={require('../assets/images/user.png')} />
+        <BottomSheet modalProps={{}} isVisible={isVisible}>
+          {list.map((l, i) => (
+            <ListItem key={i} containerStyle={l.containerStyle} onPress={l.onPress}>
+              <ListItem.Content>
+                <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+              </ListItem.Content>
+            </ListItem>
+          ))}
+        </BottomSheet>
       </View>
       <View>
         <Text style={styles.title}>Nombre Completo</Text>
