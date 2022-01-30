@@ -6,7 +6,7 @@ import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 import ApiConfig from '../api/ApiConfig';
-import { Api } from '../api/UrlApi';
+import { Api, username, password } from '../api/UrlApi';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 
 const ProfileAccount = () => {
@@ -55,7 +55,7 @@ const ProfileAccount = () => {
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
     setphotografy(result);
-    Apirequest(result.image);
+    apiRequest(result.image);
   };
 
   const takeImage = async () => {
@@ -73,7 +73,7 @@ const ProfileAccount = () => {
 
       setphotografy({ localUri: image.uri });
       if (!image.cancelled) {
-        Apirequest(image.uri);
+        apiRequest(image.uri);
       }
     }
   };
