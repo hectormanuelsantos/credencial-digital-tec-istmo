@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 import ApiConfig from '../api/ApiConfig';
 import { Api, username, password } from '../api/UrlApi';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
+import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
 
 const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -80,23 +80,24 @@ const ProfileAccount = () => {
 
   const list = [
     {
-      title: <FontAwesome5 name='camera' size={24} color='black' />,
+      title: <ButtonCamera />,
+      containerStyle: { backgroundColor: '#1b396a' },
       onPress: () => {
         takeImage();
         setIsVisible(false);
       },
     },
     {
-      title: <MaterialIcons name='photo-library' size={24} color='black' />,
+      title: <ButtonGallery />,
+      containerStyle: { backgroundColor: '#1b396a' },
       onPress: () => {
         openImage();
         setIsVisible(false);
       },
     },
     {
-      title: 'Cancelar',
-      containerStyle: { backgroundColor: 'red' },
-      titleStyle: { color: 'white' },
+      title: <ButtonCancel />,
+      containerStyle: { backgroundColor: '#dc3545' },
       onPress: () => setIsVisible(false),
     },
   ];
