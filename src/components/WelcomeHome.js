@@ -5,8 +5,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const WelcomeHome = () => {
   return (
     <View style={styles.containerWelcome}>
-      <Text style={[styles.textWelcome, styles.mb50]}>Bienvenid@ a la Credencial Digital del TecNM Campus Istmo</Text>
-      <Text style={[styles.rolUser, styles.mb50]}>Alumno</Text>
+      <Text style={[styles.textWelcome, styles.mb50]}>Credencial Digital del TecNM Campus Istmo</Text>
+      <Text style={[styles.rolUser, styles.mb50]}>Estudiante</Text>
       <Text style={styles.nameUser}>Angel Arturo Morales Rodriguez</Text>
     </View>
   );
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   rolUser: {
     color: '#000000',
     fontFamily: 'LatoBlack',
-    fontSize: hp('2.4%'),
+    fontSize: hp('3%'),
     textAlign: 'center',
     letterSpacing: 0.5,
   },
