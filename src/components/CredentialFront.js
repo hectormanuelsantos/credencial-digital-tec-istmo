@@ -10,17 +10,12 @@ const CredentialFront = () => {
       </View>
       <View style={[styles.containerProfile, styles.mb25]}>
         <Image style={styles.photo} source={{ uri: 'https://i.imgur.com/U82lwer.jpg' }} />
-        <View style={styles.containerName}>
-          <Text style={styles.name}>Angel Arturo Morales Rodriguez</Text>
-        </View>
       </View>
       <View>
-        <Text style={styles.title}>Carrera</Text>
-        <Text style={[styles.subtitle, styles.mb20]}>Ingeniería en Sistemas Computacionales</Text>
-        <Text style={styles.title}>Control</Text>
-        <Text style={[styles.subtitle, styles.mb20]}>18190683</Text>
-        <Text style={styles.title}>Dirección</Text>
-        <Text style={styles.subtitle}>Amistad SN, Col. Deportiva Sur, Salina Cruz Oax.</Text>
+        <Text style={[styles.name, styles.mb25]}>Angel Arturo Morales Rodriguez</Text>
+        <Text style={styles.title}>Número de Control</Text>
+        <Text style={[styles.subtitle, styles.mb25]}>18190683</Text>
+        <Text style={styles.rolUser}>Estudiante</Text>
       </View>
     </View>
   );
@@ -36,6 +31,7 @@ const styles = StyleSheet.create({
     maxWidth: wp('90%'),
     height: 'auto',
     height: 520,
+    // height: 'auto',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: wp('5%'),
@@ -49,9 +45,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   containerProfile: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
   photo: {
     width: 110,
@@ -65,6 +59,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'LatoBlack',
     fontSize: hp('3%'),
+    textAlign: 'center',
     letterSpacing: 0.5,
     lineHeight: 30,
     marginBottom: 10,
@@ -83,11 +78,15 @@ const styles = StyleSheet.create({
     fontSize: hp('2.2%'),
     textAlign: 'center',
   },
+  rolUser: {
+    color: '#ffffff',
+    fontFamily: 'LatoBlack',
+    fontSize: hp('3.6%'),
+    textAlign: 'center',
+    letterSpacing: 1,
+  },
   mb25: {
     marginBottom: 25,
-  },
-  mb20: {
-    marginBottom: 20,
   },
 });
 
