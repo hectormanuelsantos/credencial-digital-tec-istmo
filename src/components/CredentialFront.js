@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     maxWidth: wp('90%'),
     height: 'auto',
     height: 520,
-    // height: 'auto',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: wp('5%'),
