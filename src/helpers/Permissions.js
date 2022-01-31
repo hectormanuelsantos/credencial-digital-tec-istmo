@@ -1,11 +1,10 @@
-import { askAsync, CAMERA } from 'expo-permissions';
-import { launchImageLibraryAsync } from 'expo-image-picker';
+import { launchImageLibraryAsync, requestCameraPermissionsAsync, requestMediaLibraryPermissionsAsync } from 'expo-image-picker';
 import { Alert } from 'react-native';
 
 const loadImageFromGallery = async array => {
   const response = { status: false, image: null };
-  const resultPermissions = await askAsync(CAMERA);
-  if (resultPermissions.status === 'denied') {
+  const { status } = await requestMediaLibraryPermissionsAsync();
+  if (status !== 'granted') {
     Alert.alert('Acepta los permisos necesarios');
     return response;
   }
@@ -22,12 +21,11 @@ const loadImageFromGallery = async array => {
 };
 
 const askForPermission = async () => {
-  const permissionResult = await askAsync(CAMERA);
-  if (permissionResult.status !== 'granted' && permissionResult.status !== 'denied') {
-    Alert.alert('No hay permisos para acceder a la cámara', [{ text: 'ok' }]);
+  const { status } = await requestCameraPermissionsAsync();
+  if (status !== 'granted') {
+    Alert.alert('No hay permisos para acceder a la cámara');
     return false;
   }
   return true;
 };
-
 export { loadImageFromGallery, askForPermission };
