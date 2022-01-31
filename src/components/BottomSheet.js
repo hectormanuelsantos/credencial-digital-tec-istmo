@@ -28,7 +28,7 @@ const ButtonCancel = () => {
       <Text style={styles.text}>Cancelar</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   containerButton: {
