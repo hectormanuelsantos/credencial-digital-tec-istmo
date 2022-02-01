@@ -31,7 +31,7 @@ const AuthSignIn = () => {
   if (!loginSuccess) {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
-  /* console.log(azureLoginObject); */
+
   return <BottomNavigation />;
 };
 
