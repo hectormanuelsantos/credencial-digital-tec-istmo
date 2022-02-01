@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignInScreen from '../screens/SignInScreen';
 import BottomNavigation from './BottomNavigation';
 import AuthSignIn from '../auth/AuthSignIn';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const MainStack = () => {
         <Stack.Screen name='BottomNavigation' component={BottomNavigation} />
         <Stack.Screen name='AuthSignIn' component={AuthSignIn} />
       </Stack.Navigator>
+      <Toast ref={toast => (this.toast = toast)} />
     </NavigationContainer>
   );
 };

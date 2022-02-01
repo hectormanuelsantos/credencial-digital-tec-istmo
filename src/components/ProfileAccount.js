@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,11 +10,12 @@ import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
 const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
-  let ncontrol = '18190687';
-  const url = apiGetFoto(ncontrol);
+
+  let ncontrol = '18190681';
+  apiGetFoto(ncontrol, setphotografy);
+
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
-    setphotografy(result);
     apiPostFoto(result.image, ncontrol);
   };
 
@@ -30,8 +31,6 @@ const ProfileAccount = () => {
         quality: 1,
         base64: true,
       });
-
-      setphotografy({ localUri: image.uri });
       if (!image.cancelled) {
         apiPostFoto(image.uri, ncontrol);
       }
@@ -65,7 +64,12 @@ const ProfileAccount = () => {
   return (
     <View style={[styles.containerContent, styles.mb20]}>
       <View style={[styles.photoProfile, styles.mb20]}>
-        <Avatar onPress={() => setIsVisible(true)} size={160} source={url} />
+        <Avatar
+          rounded
+          onPress={() => setIsVisible(true)}
+          size={160}
+          source={photografy ? { uri: photografy } : require('../assets/images/user.png')}
+        />
         <BottomSheet modalProps={{}} isVisible={isVisible}>
           {list.map((l, i) => (
             <ListItem key={i} containerStyle={l.containerStyle} onPress={l.onPress}>

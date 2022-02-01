@@ -37,18 +37,18 @@ const apiPostFoto = (uri, ncontrol) => {
       }
     });
 };
-const apiGetFoto = async ncontrol => {
+const apiGetFoto = async (ncontrol, setphotografy) => {
   try {
     const foto = await ApiConfig.get(`credenciales?ncontrol=${ncontrol}`, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    const url = await foto.data[0].Foto.url;
-    console.log(`'${url}'`);
+    const fotoUrl = await foto.data[0].Foto.url;
+    setphotografy(fotoUrl);
+    console.log(fotoUrl);
   } catch (error) {
-    seterror(true);
-    toast.show('No se pudo obtener la foto', 2000);
+    toast.show('Error al  obtener la foto, intentelo mas tarde', 4000);
   }
 };
 
