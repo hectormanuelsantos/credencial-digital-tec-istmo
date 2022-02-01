@@ -4,6 +4,7 @@ import { Api, username, password } from './UrlApi';
 const apiPostFoto = (uri, ncontrol) => {
   let numero = ncontrol;
   let uriImage = uri;
+
   ApiConfig.post('auth/local', {
     identifier: username,
     password: password,
@@ -13,13 +14,16 @@ const apiPostFoto = (uri, ncontrol) => {
     })
     .then(user => {
       const formData = new FormData();
+
       formData.append(
         'data',
         JSON.stringify({
           ncontrol: numero,
         }),
       );
+
       let filename = numero + '-image.jpg';
+
       formData.append('files.Foto', {
         uri: uriImage,
         name: filename,
@@ -37,6 +41,7 @@ const apiPostFoto = (uri, ncontrol) => {
       }
     });
 };
+
 const apiGetFoto = async (ncontrol, setphotografy) => {
   try {
     const foto = await ApiConfig.get(`credenciales?ncontrol=${ncontrol}`, {
@@ -44,9 +49,10 @@ const apiGetFoto = async (ncontrol, setphotografy) => {
         'Content-Type': 'application/json',
       },
     });
+
     const fotoUrl = await foto.data[0].Foto.url;
+
     setphotografy(fotoUrl);
-    console.log(fotoUrl);
   } catch (error) {
     toast.show('Error al  obtener la foto, intentelo mas tarde', 4000);
   }
