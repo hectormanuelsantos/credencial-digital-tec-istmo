@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 import SignInScreen from '../screens/SignInScreen';
 import BottomNavigation from './BottomNavigation';
 import AuthSignIn from '../auth/AuthSignIn';
-import Toast, { DURATION } from 'react-native-easy-toast';
 
 const Stack = createNativeStackNavigator();
 
