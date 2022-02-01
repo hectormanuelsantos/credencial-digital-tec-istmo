@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
-import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
 import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
+import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
 
 const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
 
-  let ncontrol = '18190681';
+  let ncontrol = '18190683';
   apiGetFoto(ncontrol, setphotografy);
 
   const openImage = async () => {
