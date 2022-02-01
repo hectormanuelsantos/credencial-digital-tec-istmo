@@ -1,61 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
-
-import ApiConfig from '../api/ApiConfig';
-import { Api, username, password } from '../api/UrlApi';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
+import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
 
 const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
 
-  const apiRequest = uri => {
-    let numero = '19190780';
-    let uriImage = uri;
-    ApiConfig.post('auth/local', {
-      identifier: username,
-      password: password,
-    })
-      .then(res => {
-        return res.data;
-      })
-      .then(user => {
-        const formData = new FormData();
-        formData.append(
-          'data',
-          JSON.stringify({
-            ncontrol: numero,
-          }),
-        );
-        let filename = numero + '-image.jpg';
-        formData.append('files.Foto', {
-          uri: uriImage,
-          name: filename,
-          type: 'image/jpeg',
-        });
-
-        if (user.jwt) {
-          const response = fetch(`${Api}/credenciales`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-              Authorization: `Bearer ${user.jwt}`,
-            },
-          });
-          const data = response.json();
-          console.log('data', data);
-        }
-      });
-  };
+  let ncontrol = '18190681';
+  apiGetFoto(ncontrol, setphotografy);
 
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
-    setphotografy(result);
-    apiRequest(result.image);
+    apiPostFoto(result.image, ncontrol);
   };
 
   const takeImage = async () => {
@@ -70,10 +31,8 @@ const ProfileAccount = () => {
         quality: 1,
         base64: true,
       });
-
-      setphotografy({ localUri: image.uri });
       if (!image.cancelled) {
-        apiRequest(image.uri);
+        apiPostFoto(image.uri, ncontrol);
       }
     }
   };
@@ -105,7 +64,12 @@ const ProfileAccount = () => {
   return (
     <View style={[styles.containerContent, styles.mb20]}>
       <View style={[styles.photoProfile, styles.mb20]}>
-        <Avatar onPress={() => setIsVisible(true)} size={160} source={require('../assets/images/user.png')} />
+        <Avatar
+          rounded
+          onPress={() => setIsVisible(true)}
+          size={160}
+          source={photografy ? { uri: photografy } : require('../assets/images/user.png')}
+        />
         <BottomSheet modalProps={{}} isVisible={isVisible}>
           {list.map((l, i) => (
             <ListItem key={i} containerStyle={l.containerStyle} onPress={l.onPress}>

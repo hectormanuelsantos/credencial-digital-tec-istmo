@@ -13,7 +13,7 @@ const AuthSignIn = () => {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET_KEY,
     redirect_uri: 'http://localhost:3000',
-    scope: 'User.Read',
+    scope: 'User.Read openid',
   };
 
   const azureInstance = new AzureInstance(credentials);
@@ -31,7 +31,7 @@ const AuthSignIn = () => {
   if (!loginSuccess) {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
-
+  /* console.log(azureLoginObject); */
   return <BottomNavigation />;
 };
 
