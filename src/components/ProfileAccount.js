@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -11,9 +11,19 @@ import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
 const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
-  let ncontrol = '18190683';
+  let ncontrol = '18190615';
   apiGetFoto(ncontrol, setphotografy);
+
+  const wait = timeout => new Promise(resolve => setTimeout(resolve, timeout));
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+
+  const disabledBottomShet = () => (!photografy ? setIsVisible(true) : setIsVisible(false));
 
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
@@ -63,11 +73,14 @@ const ProfileAccount = () => {
   ];
 
   return (
-    <View style={[styles.containerContent, styles.mb20]}>
+    <ScrollView
+      style={[styles.containerContent, styles.mb20]}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+    >
       <View style={[styles.photoProfile, styles.mb20]}>
         <Avatar
           rounded
-          onPress={() => setIsVisible(true)}
+          onPress={disabledBottomShet}
           size={160}
           source={photografy ? { uri: photografy } : require('../assets/images/user.png')}
         />
@@ -89,7 +102,7 @@ const ProfileAccount = () => {
         <Text style={styles.title}>Correo Electrónico</Text>
         <Text style={styles.subtitle}>18190683@istmo.tecnm.mx</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
