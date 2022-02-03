@@ -53,8 +53,7 @@ const apiGetFoto = async (ncontrol, setphotografy) => {
     const fotoUrl = await foto.data[0].Foto.url;
 
     setphotografy(fotoUrl);
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 
 export { apiPostFoto, apiGetFoto };
