@@ -54,7 +54,6 @@ const apiGetFoto = async (ncontrol, setphotografy) => {
 
     setphotografy(fotoUrl);
   } catch (error) {
-    toast.show('Error al  obtener la foto, intentelo mas tarde', 4000);
   }
 };
 
