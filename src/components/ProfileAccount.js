@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -11,23 +11,23 @@ import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
 const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
 
-  let ncontrol = '18190615';
+  let ncontrol = '18190635';
   apiGetFoto(ncontrol, setphotografy);
 
-  const wait = timeout => new Promise(resolve => setTimeout(resolve, timeout));
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
-  }, []);
+  const onRefresh = () => {
+    toast.show('Subiendo foto..', 5000);
+    setTimeout(() => {
+      apiGetFoto(ncontrol, setphotografy);
+    }, 5000);
+  };
 
   const disabledBottomShet = () => (!photografy ? setIsVisible(true) : setIsVisible(false));
 
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
     apiPostFoto(result.image, ncontrol);
+    onRefresh();
   };
 
   const takeImage = async () => {
@@ -44,6 +44,7 @@ const ProfileAccount = () => {
       });
       if (!image.cancelled) {
         apiPostFoto(image.uri, ncontrol);
+        onRefresh();
       }
     }
   };
@@ -73,10 +74,7 @@ const ProfileAccount = () => {
   ];
 
   return (
-    <ScrollView
-      style={[styles.containerContent, styles.mb20]}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-    >
+    <ScrollView style={[styles.containerContent, styles.mb20]}>
       <View style={[styles.photoProfile, styles.mb20]}>
         <Avatar
           rounded

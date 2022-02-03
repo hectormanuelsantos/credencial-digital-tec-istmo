@@ -17,7 +17,15 @@ const MainStack = () => {
         <Stack.Screen name='BottomNavigation' component={BottomNavigation} />
         <Stack.Screen name='AuthSignIn' component={AuthSignIn} />
       </Stack.Navigator>
-      <Toast ref={toast => (this.toast = toast)} />
+      <Toast
+        ref={toast => (this.toast = toast)}
+        style={{ backgroundColor: '#1b396a' }}
+        position='bottom'
+        positionValue={150}
+        fadeInDuration={750}
+        fadeOutDuration={1000}
+        textStyle={{ color: '#ffffff' }}
+      />
     </NavigationContainer>
   );
 };
