@@ -27,7 +27,7 @@ const loadImageFromGallery = async array => {
 const askForPermission = async () => {
   const { status } = await requestCameraPermissionsAsync();
 
-  if (status !== 'granted') {
+  if (status !== 'granted' && status !== 'denied') {
     Alert.alert('No hay permisos para acceder a la cámara');
     return false;
   }
