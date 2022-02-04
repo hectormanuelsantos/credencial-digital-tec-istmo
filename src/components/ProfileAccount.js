@@ -12,11 +12,11 @@ const ProfileAccount = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
 
-  let ncontrol = '18190635';
+  let ncontrol = '18190636';
   apiGetFoto(ncontrol, setphotografy);
 
   const onRefresh = () => {
-    toast.show('Subiendo foto..', 5000);
+    toast.show('Subiendo foto...', 5000);
     setTimeout(() => {
       apiGetFoto(ncontrol, setphotografy);
     }, 5000);
@@ -26,8 +26,11 @@ const ProfileAccount = () => {
 
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
-    apiPostFoto(result.image, ncontrol);
-    onRefresh();
+
+    if (!result.image.cancelled) {
+      apiPostFoto(result.image, ncontrol);
+      onRefresh();
+    }
   };
 
   const takeImage = async () => {
