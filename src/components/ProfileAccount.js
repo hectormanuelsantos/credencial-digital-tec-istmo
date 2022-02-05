@@ -7,7 +7,6 @@ import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
-import { TextTransform } from '../helpers/TextTransform';
 
 const ProfileAccount = ({ data }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -98,7 +97,7 @@ const ProfileAccount = ({ data }) => {
       </View>
       <View>
         <Text style={styles.title}>Nombre Completo</Text>
-        <Text style={[styles.subtitle, styles.mb20]}>{TextTransform(data)}</Text>
+        <Text style={[styles.subtitle, styles.mb20]}>{data.displayName}</Text>
       </View>
       <View>
         <Text style={styles.title}>Correo Electrónico</Text>
