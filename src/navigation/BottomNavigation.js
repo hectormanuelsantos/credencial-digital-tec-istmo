@@ -22,7 +22,7 @@ const screenOptions = (route, color) => {
   return <FontAwesome5 name={iconName} size={20} color={color} />;
 };
 
-const BottomNavigation = () => {
+const BottomNavigation = ({ data }) => {
   return (
     <Tab.Navigator
       initialRouteName='Home'
@@ -40,7 +40,7 @@ const BottomNavigation = () => {
     >
       <Tab.Screen
         name='Home'
-        component={HomeScreen}
+        children={() => <HomeScreen data={data} />}
         options={{
           title: 'Inicio',
           headerShown: false,
@@ -49,7 +49,7 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         name='Credential'
-        component={CredentialScreen}
+        children={() => <CredentialScreen data={data} />}
         options={{
           title: 'Mi Credencial',
           headerShown: false,
@@ -58,7 +58,7 @@ const BottomNavigation = () => {
       />
       <Tab.Screen
         name='Account'
-        component={AccountScreen}
+        children={() => <AccountScreen data={data} />}
         options={{
           title: 'Mi Cuenta',
           headerShown: false,

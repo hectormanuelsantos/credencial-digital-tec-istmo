@@ -2,12 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const WelcomeHome = () => {
+import { TextTransform } from '../helpers/TextTransform';
+
+const WelcomeHome = ({ data }) => {
   return (
     <View style={styles.containerWelcome}>
       <Text style={[styles.textWelcome, styles.mb50]}>Credencial Digital del TecNM Campus Istmo</Text>
-      <Text style={[styles.rolUser, styles.mb50]}>Estudiante</Text>
-      <Text style={styles.nameUser}>Angel Arturo Morales Rodriguez</Text>
+      <Text style={[styles.rolUser, styles.mb50]}>{data.jobTitle}</Text>
+      <Text style={styles.nameUser}>{TextTransform(data)}</Text>
     </View>
   );
 };

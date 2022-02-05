@@ -7,12 +7,13 @@ import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
+import { TextTransform } from '../helpers/TextTransform';
 
-const ProfileAccount = () => {
+const ProfileAccount = ({ data }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [photografy, setphotografy] = useState(null);
 
-  let ncontrol = '18190636';
+  let ncontrol = data.mail.slice(0, 8);
   apiGetFoto(ncontrol, setphotografy);
 
   const onRefresh = () => {
@@ -97,11 +98,11 @@ const ProfileAccount = () => {
       </View>
       <View>
         <Text style={styles.title}>Nombre Completo</Text>
-        <Text style={[styles.subtitle, styles.mb20]}>Angel Arturo Morales Rodriguez</Text>
+        <Text style={[styles.subtitle, styles.mb20]}>{TextTransform(data)}</Text>
       </View>
       <View>
         <Text style={styles.title}>Correo Electrónico</Text>
-        <Text style={styles.subtitle}>18190683@istmo.tecnm.mx</Text>
+        <Text style={styles.subtitle}>{data.mail}</Text>
       </View>
     </ScrollView>
   );

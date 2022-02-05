@@ -7,13 +7,17 @@ import BottomNavigation from '../navigation/BottomNavigation';
 
 const AuthSignIn = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [azureLoginObject, setAzureLoginObject] = useState({});
+  const [data, setData] = useState({
+    displayName: '',
+    jobTitle: '',
+    mail: '',
+  });
 
   const credentials = {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET_KEY,
     redirect_uri: 'http://localhost:3000',
-    scope: 'User.Read openid',
+    scope: 'User.Read User.ReadBasic.All User.Read.All Mail.Read offline_access',
   };
 
   const azureInstance = new AzureInstance(credentials);
@@ -22,7 +26,11 @@ const AuthSignIn = () => {
     try {
       const result = await azureInstance.getUserInfo();
       setLoginSuccess(true);
-      setAzureLoginObject(result);
+      setData({
+        displayName: result.displayName,
+        jobTitle: result.jobTitle,
+        mail: result.mail,
+      });
     } catch (err) {
       console.error(err);
     }
@@ -32,7 +40,7 @@ const AuthSignIn = () => {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
 
-  return <BottomNavigation />;
+  return <BottomNavigation data={data} />;
 };
 
 export default AuthSignIn;

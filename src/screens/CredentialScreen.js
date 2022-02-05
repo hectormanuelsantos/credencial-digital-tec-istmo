@@ -6,7 +6,7 @@ import CredentialFront from '../components/CredentialFront';
 import CredentialBack from '../components/CredentialBack';
 import SwitchCard from '../components/SwitchCard';
 
-const CredentialScreen = () => {
+const CredentialScreen = ({ data }) => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -15,7 +15,7 @@ const CredentialScreen = () => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle='light-content' backgroundColor='#1b396a' />
       <HeaderCredential />
-      {isEnabled ? <CredentialBack /> : <CredentialFront />}
+      {isEnabled ? <CredentialBack /> : <CredentialFront data={data} />}
       <SwitchCard isEnabled={isEnabled} toggleSwitch={toggleSwitch} />
     </ScrollView>
   );

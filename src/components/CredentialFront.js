@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const CredentialFront = () => {
+const CredentialFront = ({ data }) => {
   return (
     <View style={styles.containerCredentialFront}>
       <View style={[styles.containerLogo, styles.mb25]}>
@@ -12,10 +12,10 @@ const CredentialFront = () => {
         <Image style={styles.photo} source={{ uri: 'https://i.imgur.com/U82lwer.jpg' }} />
       </View>
       <View>
-        <Text style={[styles.name, styles.mb25]}>Angel Arturo Morales Rodriguez</Text>
+        <Text style={[styles.name, styles.mb25]}>{data.displayName}</Text>
         <Text style={styles.title}>Número de Control</Text>
-        <Text style={[styles.subtitle, styles.mb25]}>18190683</Text>
-        <Text style={styles.rolUser}>Estudiante</Text>
+        <Text style={[styles.subtitle, styles.mb25]}>{data.mail.slice(0, 8)}</Text>
+        <Text style={styles.rolUser}>{data.jobTitle.toUpperCase()}</Text>
       </View>
     </View>
   );
