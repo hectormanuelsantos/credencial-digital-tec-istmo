@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import RCTNetworking from 'react-native/Libraries/Network/RCTNetworking';
+import React from 'react';
 import { Alert, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import RCTNetworking from 'react-native/Libraries/Network/RCTNetworking';
 
-const ButtonSignOut = ({ navigation }) => {
-  const [loginSuccess, setLoginSuccess] = useState(false);
+const ButtonSignOut = () => {
+  const navigation = useNavigation();
 
   const signOut = () => {
     Alert.alert('Cerrar Sesión', '¿Estas seguro que deseas cerrar tu sesión?', [
@@ -16,7 +17,6 @@ const ButtonSignOut = ({ navigation }) => {
         text: 'OK',
         onPress: () => {
           RCTNetworking.clearCookies(() => {});
-          setLoginSuccess(false);
           navigation.navigate('SignIn');
         },
       },

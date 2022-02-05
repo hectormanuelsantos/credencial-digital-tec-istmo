@@ -5,13 +5,13 @@ import HeaderAccount from '../components/HeaderAccount';
 import ProfileAccount from '../components/ProfileAccount';
 import ButtonSignOut from '../components/ButtonSignOut';
 
-const AccountScreen = ({ navigation, data }) => {
+const AccountScreen = ({ data }) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle='light-content' backgroundColor='#1b396a' />
       <HeaderAccount />
       <ProfileAccount data={data} />
-      <ButtonSignOut navigation={navigation} />
+      <ButtonSignOut />
     </ScrollView>
   );
 };
