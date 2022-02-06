@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+import { apiGetFoto } from '../api/ApiRequest';
+
 const CredentialFront = ({ data }) => {
+  const [photografy, setphotografy] = useState(null);
+
+  let ncontrol = data.mail.slice(0, 8);
+
+  apiGetFoto(ncontrol, setphotografy);
+
   return (
     <View style={styles.containerCredentialFront}>
       <View style={[styles.containerLogo, styles.mb25]}>
         <Image style={styles.logoTecNM} source={require('../assets/images/logo-tecnm.png')} resizeMode='contain' />
       </View>
       <View style={[styles.containerProfile, styles.mb25]}>
-        <Image style={styles.photo} source={{ uri: 'https://i.imgur.com/U82lwer.jpg' }} />
+        <Image style={styles.photo} source={{ uri: photografy }} />
       </View>
       <View>
         <Text style={[styles.name, styles.mb25]}>{data.displayName}</Text>
@@ -47,8 +55,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   photo: {
-    width: 110,
-    height: 130,
+    width: wp('35%'),
+    height: hp('20%'),
   },
   containerName: {
     width: 180,
