@@ -13,9 +13,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.hectormanuelsantos.credencialdigitaltecistmo",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.hectormanuelsantos.credencialdigitaltecistmo",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
