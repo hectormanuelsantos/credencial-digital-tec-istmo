@@ -5,8 +5,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const WelcomeHome = ({ data }) => {
   return (
     <View style={styles.containerWelcome}>
-      <Text style={[styles.textWelcome, styles.mb50]}>Credencial Digital del TecNM Campus Istmo</Text>
-      <Text style={[styles.rolUser, styles.mb50]}>{data.jobTitle}</Text>
+      <Text style={[styles.textWelcome, styles.mb15]}>Credencial Digital del TecNM Campus Istmo</Text>
+      <Text style={[styles.rolUser, styles.mb15]}>{data.jobTitle}</Text>
       <Text style={styles.nameUser}>{data.displayName}</Text>
     </View>
   );
@@ -22,27 +22,27 @@ const styles = StyleSheet.create({
   textWelcome: {
     color: '#000000',
     fontFamily: 'LatoBold',
-    fontSize: hp('2.4%'),
+    fontSize: hp('3%'),
     textAlign: 'center',
-    lineHeight: 25,
-    letterSpacing: 0.5,
+    lineHeight: 30,
+    letterSpacing: 1,
   },
   rolUser: {
     color: '#000000',
     fontFamily: 'LatoBlack',
-    fontSize: hp('3%'),
-    textAlign: 'center',
-    letterSpacing: 0.5,
-  },
-  nameUser: {
-    fontFamily: 'LatoBold',
-    fontSize: hp('2.6%'),
-    lineHeight: 25,
+    fontSize: hp('5%'),
     textAlign: 'center',
     letterSpacing: 1,
   },
-  mb50: {
-    marginBottom: 50,
+  nameUser: {
+    fontFamily: 'LatoBold',
+    fontSize: hp('3%'),
+    lineHeight: 30,
+    textAlign: 'center',
+    letterSpacing: 1,
+  },
+  mb15: {
+    marginBottom: wp('15%'),
   },
 });
 
