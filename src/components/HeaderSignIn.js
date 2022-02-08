@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoTecnm: {
-    width: wp('40%'),
-    height: hp('30%'),
+    width: wp('100%'),
+    height: hp('40%'),
   },
 });
 

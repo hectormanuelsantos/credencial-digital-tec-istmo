@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingTop: 100,
-    paddingBottom: 50,
+    paddingTop: wp('30%'),
+    paddingBottom: wp('10%'),
   },
 });
 

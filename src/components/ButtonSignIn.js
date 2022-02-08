@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
     fontFamily: 'LatoBold',
-    fontSize: hp('2%'),
+    fontSize: hp('2.2%'),
     letterSpacing: 0.5,
     marginBottom: 20,
   },
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
-    paddingVertical: 6,
+    height: 50,
   },
   imageMicrosoft: {
-    width: wp('30%'),
+    width: wp('100%'),
     height: hp('4%'),
   },
 });
