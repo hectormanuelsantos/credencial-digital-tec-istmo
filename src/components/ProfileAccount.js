@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
+import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
@@ -77,8 +77,8 @@ const ProfileAccount = ({ data }) => {
   ];
 
   return (
-    <ScrollView style={[styles.containerContent, styles.mb20]}>
-      <View style={[styles.photoProfile, styles.mb20]}>
+    <ScrollView style={styles.containerContent}>
+      <View style={styles.photoProfile}>
         <Avatar
           rounded
           onPress={disabledBottomShet}
@@ -97,7 +97,7 @@ const ProfileAccount = ({ data }) => {
       </View>
       <View>
         <Text style={styles.title}>Nombre Completo</Text>
-        <Text style={[styles.subtitle, styles.mb20]}>{data.displayName}</Text>
+        <Text style={[styles.subtitle, styles.mb5]}>{data.displayName}</Text>
       </View>
       <View>
         <Text style={styles.title}>Correo Electrónico</Text>
@@ -114,26 +114,29 @@ const styles = StyleSheet.create({
     width: wp('90%'),
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 20,
-    padding: 20,
+    marginTop: wp('5%'),
+    marginBottom: wp('10%'),
+    padding: wp('5%'),
   },
   photoProfile: {
     alignItems: 'center',
+    marginBottom: wp('10%'),
   },
   title: {
     color: '#f47b20',
     fontFamily: 'LatoBold',
-    fontSize: hp('2.4%'),
+    fontSize: hp('2.6%'),
     marginBottom: 5,
+    letterSpacing: 1,
   },
   subtitle: {
     color: '#ffffff',
     fontFamily: 'LatoRegular',
-    fontSize: hp('2.2%'),
+    fontSize: hp('2.4%'),
     letterSpacing: 0.5,
   },
-  mb20: {
-    marginBottom: 20,
+  mb5: {
+    marginBottom: wp('5%'),
   },
 });
 

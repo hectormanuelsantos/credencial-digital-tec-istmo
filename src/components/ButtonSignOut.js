@@ -8,13 +8,13 @@ const ButtonSignOut = () => {
   const navigation = useNavigation();
 
   const signOut = () => {
-    Alert.alert('Cerrar Sesión', '¿Estas seguro que deseas cerrar tu sesión?', [
+    Alert.alert('Cerrar Sesión', '¿Estás seguro de que deseas cerrar tu sesión?', [
       {
         text: 'Cancelar',
         style: 'cancel',
       },
       {
-        text: 'OK',
+        text: 'Aceptar',
         onPress: () => {
           RCTNetworking.clearCookies(() => {});
           navigation.navigate('SignIn');
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   textButton: {
     color: '#000000',
     fontFamily: 'LatoBold',
-    fontSize: hp('2.4%'),
+    fontSize: hp('2.6%'),
     letterSpacing: 1,
   },
 });
