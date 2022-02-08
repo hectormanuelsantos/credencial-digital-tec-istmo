@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 8,
     height: 50,
   },
   imageMicrosoft: {
