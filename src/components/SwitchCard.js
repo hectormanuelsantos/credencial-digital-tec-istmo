@@ -18,7 +18,6 @@ const SwitchCard = ({ isEnabled, toggleSwitch }) => {
 const styles = StyleSheet.create({
   containerSwitch: {
     alignItems: 'center',
-    marginTop: 20,
   },
 });
 
