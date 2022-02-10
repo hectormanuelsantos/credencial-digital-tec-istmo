@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   textHeader: {
     color: '#ffffff',
     fontFamily: 'LatoBlack',
-    fontSize: hp('2.6%'),
+    fontSize: hp('3%'),
     letterSpacing: 1,
     textAlign: 'center',
   },
