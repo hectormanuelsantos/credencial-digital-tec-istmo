@@ -12,7 +12,7 @@ const ButtonSignIn = ({ navigation }) => {
         activeOpacity={0.85}
         underlayColor='#ffffff10'
       >
-        <Image style={styles.imageMicrosoft} source={require('../assets/images/logo-microsoft.png')} resizeMode='contain' />
+        <Image style={styles.imageMicrosoft} source={require('../assets/images/logo-microsoft.png')} />
       </TouchableHighlight>
     </View>
   );
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     height: 50,
   },
   imageMicrosoft: {
-    width: wp('100%'),
-    height: hp('4%'),
+    width: 120,
+    height: 25,
   },
 });
 
