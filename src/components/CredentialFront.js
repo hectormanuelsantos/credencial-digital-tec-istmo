@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   containerProfile: {
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 5,
   },
   photo: {
     width: 130,
