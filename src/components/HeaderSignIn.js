@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const HeaderSignIn = () => {
   return (
     <View style={styles.containerLogos}>
-      <Image style={styles.logoTecnm} source={require('../assets/images/logo-tecnm-vertical.png')} resizeMode='contain' />
+      <Image style={styles.logoTecnm} source={require('../assets/images/logo-tecnm-vertical.png')} />
     </View>
   );
 };
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoTecnm: {
-    width: wp('100%'),
-    height: hp('40%'),
+    width: 200,
+    height: 290,
   },
 });
 
