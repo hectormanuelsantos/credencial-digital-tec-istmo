@@ -8,11 +8,11 @@ const CredentialBack = () => {
   return (
     <View style={styles.containerCredentialBack}>
       <View style={[styles.containerLogoEducacion, styles.mb30]}>
-        <Image style={styles.logoEducacion} source={require('../assets/images/logo-educacion.png')} resizeMode='contain' />
+        <Image style={styles.logoEducacion} source={require('../assets/images/logo-educacion.png')} />
       </View>
       <View style={[styles.containerCampus, styles.mb30]}>
-        <Image style={styles.logoIti} source={require('../assets/images/logo-iti.png')} resizeMode='contain' />
-        <Text style={styles.nameCampus}>IT Istmo</Text>
+        <Image style={styles.logoIti} source={require('../assets/images/logo-iti.png')} />
+        <Text style={styles.nameCampus}>Instituto Tecnológico del Istmo</Text>
       </View>
       <View>
         <Text style={styles.title}>Vigencia</Text>
@@ -26,11 +26,10 @@ const styles = StyleSheet.create({
   containerCredentialBack: {
     backgroundColor: '#1b396a',
     borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 25,
+    paddingHorizontal: wp('5%'),
+    paddingVertical: wp('5%'),
     width: 350,
     maxWidth: wp('90%'),
-    height: 'auto',
     height: 520,
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -40,23 +39,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoEducacion: {
-    width: wp('50%'),
-    height: hp('5%'),
-    resizeMode: 'contain',
+    width: 220,
+    height: 45,
   },
   containerCampus: {
     alignItems: 'center',
   },
   logoIti: {
-    width: wp('15%'),
-    height: hp('8%'),
-    resizeMode: 'contain',
-    marginBottom: 20,
+    width: 80,
+    height: 72,
+    marginBottom: 10,
   },
   nameCampus: {
     color: '#ffffff',
     fontFamily: 'LatoBold',
-    fontSize: hp('3%'),
+    fontSize: hp('2.2%'),
     letterSpacing: 1,
     textAlign: 'center',
   },
@@ -71,7 +68,7 @@ const styles = StyleSheet.create({
   vigencia: {
     color: '#ffffff',
     fontFamily: 'LatoBlack',
-    fontSize: hp('3.8%'),
+    fontSize: hp('3.6%'),
     textAlign: 'center',
     letterSpacing: 0.5,
   },
