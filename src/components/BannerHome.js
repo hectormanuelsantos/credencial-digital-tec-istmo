@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const BannerHome = () => {
   return (
     <View style={styles.containerBanner}>
-      <Image style={styles.imageBanner} source={require('../assets/images/logo-tecnm.png')} resizeMode='contain' />
+      <Image style={styles.imageBanner} source={require('../assets/images/logo-tecnm.png')} />
     </View>
   );
 };
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     height: hp('30%'),
   },
   imageBanner: {
-    width: wp('100%'),
-    height: hp('15%'),
+    width: 286,
+    height: 122,
   },
 });
 
