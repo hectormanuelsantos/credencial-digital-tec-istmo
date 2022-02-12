@@ -1,98 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-// import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
-// import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-// import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
-import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
-// import { ButtonCamera, ButtonGallery, ButtonCancel } from './BottomSheet';
-
 const ProfileAccount = ({ data }) => {
-  // const [isVisible, setIsVisible] = useState(false);
-  const [photografy, setphotografy] = useState(null);
-
-  let ncontrol = data.mail.slice(0, 8);
-  apiGetFoto(ncontrol, setphotografy);
-
-  const onRefresh = () => {
-    toast.show('Subiendo foto...', 5000);
-    setTimeout(() => {
-      apiGetFoto(ncontrol, setphotografy);
-    }, 5000);
-  };
-
-  const disabledBottomShet = () => (!photografy ? setIsVisible(true) : setIsVisible(false));
-
-  // const openImage = async () => {
-  //   const result = await loadImageFromGallery([1, 1]);
-
-  //   if (!result.image.cancelled) {
-  //     apiPostFoto(result.image, ncontrol);
-  //     onRefresh();
-  //   }
-  // };
-
-  // const takeImage = async () => {
-  //   const hasPermission = await askForPermission();
-  //   if (!hasPermission) {
-  //     return;
-  //   } else {
-  //     let image = await launchCameraAsync({
-  //       mediaTypes: MediaTypeOptions.Images,
-  //       allowsEditing: true,
-  //       aspect: [3, 3],
-  //       quality: 1,
-  //       base64: true,
-  //     });
-  //     if (!image.cancelled) {
-  //       apiPostFoto(image.uri, ncontrol);
-  //       onRefresh();
-  //     }
-  //   }
-  // };
-
-  // const list = [
-  //   {
-  //     title: <ButtonCamera />,
-  //     containerStyle: { backgroundColor: '#1b396a' },
-  //     onPress: () => {
-  //       takeImage();
-  //       setIsVisible(false);
-  //     },
-  //   },
-  //   {
-  //     title: <ButtonGallery />,
-  //     containerStyle: { backgroundColor: '#1b396a' },
-  //     onPress: () => {
-  //       openImage();
-  //       setIsVisible(false);
-  //     },
-  //   },
-  //   {
-  //     title: <ButtonCancel />,
-  //     containerStyle: { backgroundColor: '#dc3545' },
-  //     onPress: () => setIsVisible(false),
-  //   },
-  // ];
-
   return (
     <ScrollView style={styles.containerContent}>
       <View style={styles.photoProfile}>
         <Avatar
           rounded
           size={160}
-          source={photografy ? { uri: photografy } : require('../assets/images/user.png')}
+          source={require('../assets/images/user.png')}
         />
-        {/* <BottomSheet modalProps={{}} isVisible={isVisible}>
-          {list.map((l, i) => (
-            <ListItem key={i} containerStyle={l.containerStyle} onPress={l.onPress}>
-              <ListItem.Content>
-                <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
-              </ListItem.Content>
-            </ListItem>
-          ))}
-        </BottomSheet> */}
       </View>
       <View>
         <Text style={styles.title}>Nombre Completo</Text>
