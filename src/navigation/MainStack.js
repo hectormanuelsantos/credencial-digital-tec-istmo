@@ -6,6 +6,7 @@ import Toast, { DURATION } from 'react-native-easy-toast';
 import SignInScreen from '../screens/SignInScreen';
 import BottomNavigation from './BottomNavigation';
 import AuthSignIn from '../auth/AuthSignIn';
+import UploadPhotoScreen from '../screens/UploadPhotoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const MainStack = () => {
         <Stack.Screen name='SignIn' component={SignInScreen} />
         <Stack.Screen name='BottomNavigation' component={BottomNavigation} />
         <Stack.Screen name='AuthSignIn' component={AuthSignIn} />
+        <Stack.Screen name='UploadPhoto' component={UploadPhotoScreen} />
       </Stack.Navigator>
       <Toast
         ref={toast => (this.toast = toast)}

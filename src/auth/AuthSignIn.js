@@ -3,7 +3,7 @@ import { AzureInstance, AzureLoginView } from 'expo-react-native-azure-ad-2';
 import { CLIENT_ID, CLIENT_SECRET_KEY } from '@env';
 
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
-import BottomNavigation from '../navigation/BottomNavigation';
+import UploadPhotoScreen from '../screens/UploadPhotoScreen';
 
 const AuthSignIn = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -40,7 +40,7 @@ const AuthSignIn = () => {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
 
-  return <BottomNavigation data={data} />;
+  return <UploadPhotoScreen data={data} />;
 };
 
 export default AuthSignIn;

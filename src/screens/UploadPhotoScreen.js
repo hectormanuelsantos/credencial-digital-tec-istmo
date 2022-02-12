@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
+import { Button, ScrollView, StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 import { BottomSheet, ListItem } from 'react-native-elements';
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,14 +10,19 @@ import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
 
-const UploadPhotoScreen = () => {
+import { useNavigation } from '@react-navigation/native';
+
+const UploadPhotoScreen = ({ data }) => {
+  const navigation = useNavigation();
+  console.log(data, 'data1')
+
   const [isVisible, setIsVisible] = useState(false);
 
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
 
     if (!result.image.cancelled) {
-      apiPostFoto(result.image, ncontrol);
+      // apiPostFoto(result.image, ncontrol);
     }
   };
 
@@ -35,7 +40,7 @@ const UploadPhotoScreen = () => {
       });
 
       if (!image.cancelled) {
-        apiPostFoto(image.uri, ncontrol);
+        // apiPostFoto(image.uri, ncontrol);
       }
     }
   };
@@ -53,7 +58,8 @@ const UploadPhotoScreen = () => {
       title: <ButtonGallery />,
       containerStyle: { backgroundColor: '#1b396a' },
       onPress: () => {
-        openImage();
+        // openImage();
+        navigation.navigate('BottomNavigation');
         setIsVisible(false);
       },
     },
@@ -81,6 +87,7 @@ const UploadPhotoScreen = () => {
           </ListItem>
         ))}
       </BottomSheet>
+      <Button title='Navegacion' data={data} onPress={() => navigation.navigate('BottomNavigation')} />
     </ScrollView>
   );
 };

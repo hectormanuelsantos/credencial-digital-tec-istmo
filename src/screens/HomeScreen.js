@@ -9,7 +9,8 @@ const HomeScreen = ({ data }) => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle='light-content' backgroundColor='#1b396a' />
       <BannerHome />
-      <WelcomeHome data={data} />
+      {/* <WelcomeHome data={data} /> */}
+      <WelcomeHome />
     </ScrollView>
   );
 };

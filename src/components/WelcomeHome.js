@@ -6,8 +6,8 @@ const WelcomeHome = ({ data }) => {
   return (
     <View style={styles.containerWelcome}>
       <Text style={[styles.textWelcome, styles.mb15]}>Credencial Digital del TecNM Campus Istmo</Text>
-      <Text style={[styles.rolUser, styles.mb15]}>{data.jobTitle}</Text>
-      <Text style={styles.nameUser}>{data.displayName}</Text>
+      {/* <Text style={[styles.rolUser, styles.mb15]}>{data.jobTitle}</Text>
+      <Text style={styles.nameUser}>{data.displayName}</Text> */}
     </View>
   );
 };
