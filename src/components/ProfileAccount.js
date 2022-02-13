@@ -10,7 +10,7 @@ const ProfileAccount = ({ data }) => {
         <Avatar
           rounded
           size={160}
-          source={require('../assets/images/user.png')}
+          source={{ uri: data.photography }}
         />
       </View>
       <View>
