@@ -7,7 +7,7 @@ const ButtonSignIn = ({ navigation }) => {
     <View>
       <Text style={styles.textHelp}>Ingrese usando su cuenta en:</Text>
       <TouchableHighlight
-        onPress={() => navigation.navigate('AuthSignIn')}
+        onPress={() => navigation.replace('AuthSignIn')}
         style={styles.buttonMicrosoft}
         activeOpacity={0.85}
         underlayColor='#ffffff10'
