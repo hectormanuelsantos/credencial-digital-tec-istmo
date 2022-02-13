@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, ScrollView, StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { BottomSheet, ListItem } from 'react-native-elements';
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,11 +11,8 @@ import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
 
-import { useNavigation } from '@react-navigation/native';
-
 const UploadPhotoScreen = ({ data }) => {
   const navigation = useNavigation();
-  console.log(data, 'data1')
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -58,8 +56,7 @@ const UploadPhotoScreen = ({ data }) => {
       title: <ButtonGallery />,
       containerStyle: { backgroundColor: '#1b396a' },
       onPress: () => {
-        // openImage();
-        navigation.navigate('BottomNavigation');
+        openImage();
         setIsVisible(false);
       },
     },
@@ -87,7 +84,11 @@ const UploadPhotoScreen = ({ data }) => {
           </ListItem>
         ))}
       </BottomSheet>
-      <Button title='Navegacion' data={data} onPress={() => navigation.navigate('BottomNavigation')} />
+      <Button title='Navegacion' onPress={() => navigation.replace('BottomNavigation', {
+        displayName: data.displayName,
+        jobTitle: data.jobTitle,
+        mail: data.mail
+      })} />
     </ScrollView>
   );
 };
