@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Toast, { DURATION } from 'react-native-easy-toast';
 
 import SignInScreen from '../screens/SignInScreen';
 import BottomNavigation from './BottomNavigation';
@@ -19,15 +18,6 @@ const MainStack = () => {
         <Stack.Screen name='AuthSignIn' component={AuthSignIn} />
         <Stack.Screen name='UploadPhoto' component={UploadPhotoScreen} />
       </Stack.Navigator>
-      <Toast
-        ref={toast => (this.toast = toast)}
-        style={{ backgroundColor: '#1b396a' }}
-        position='bottom'
-        positionValue={150}
-        fadeInDuration={750}
-        fadeOutDuration={1000}
-        textStyle={{ color: '#ffffff' }}
-      />
     </NavigationContainer>
   );
 };
