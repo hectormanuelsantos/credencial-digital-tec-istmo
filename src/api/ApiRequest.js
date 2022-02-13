@@ -42,7 +42,7 @@ const apiPostFoto = (uri, ncontrol) => {
     });
 };
 
-const apiGetFoto = async (ncontrol, setphotografy) => {
+const apiGetFoto = async (ncontrol, setPhotografy, setStatus) => {
   try {
     const foto = await ApiConfig.get(`credenciales?ncontrol=${ncontrol}`, {
       headers: {
@@ -51,8 +51,10 @@ const apiGetFoto = async (ncontrol, setphotografy) => {
     });
 
     const fotoUrl = await foto.data[0].Foto.url;
+    const fotoStatus = await foto.status;
 
-    setphotografy(fotoUrl);
+    setPhotografy(fotoUrl);
+    setStatus(fotoStatus);
   } catch (error) {}
 };
 
