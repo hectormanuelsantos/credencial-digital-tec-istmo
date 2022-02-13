@@ -22,7 +22,15 @@ const screenOptions = (route, color) => {
   return <FontAwesome5 name={iconName} size={20} color={color} />;
 };
 
-const BottomNavigation = ({ data }) => {
+const BottomNavigation = ({ route }) => {
+  const { displayName, jobTitle, mail } = route.params;
+
+  let data = {
+    displayName,
+    jobTitle,
+    mail
+  }
+
   return (
     <Tab.Navigator
       initialRouteName='Home'
