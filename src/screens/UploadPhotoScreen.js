@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ScrollView, StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BottomSheet, ListItem } from 'react-native-elements';
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
@@ -10,17 +10,32 @@ import HeaderUploadPhotography from '../components/HeaderUploadPhotography';
 import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
+import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
 
 const UploadPhotoScreen = ({ data }) => {
   const navigation = useNavigation();
 
   const [isVisible, setIsVisible] = useState(false);
+  const [photography, setPhotography] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  let control = data.mail.slice(0, 8);
+
+  apiGetFoto(control, setPhotography, setStatus);
+
+  const onRefresh = () => {
+    setTimeout(() => {
+      apiGetFoto(control, setPhotography, setStatus);
+    }, 1000);
+  };
 
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
 
     if (!result.image.cancelled) {
-      // apiPostFoto(result.image, ncontrol);
+      // apiPostFoto(result.image, control);
+      onRefresh();
+      status === 200 ? redirect() : console.log('Error');
     }
   };
 
@@ -38,9 +53,18 @@ const UploadPhotoScreen = ({ data }) => {
       });
 
       if (!image.cancelled) {
-        // apiPostFoto(image.uri, ncontrol);
+        apiPostFoto(image.uri, control);
       }
     }
+  };
+
+  const redirect = () => {
+    navigation.replace('BottomNavigation', {
+      displayName: data.displayName,
+      jobTitle: data.jobTitle,
+      mail: data.mail,
+      photo: photography
+    });
   };
 
   const list = [
@@ -84,11 +108,6 @@ const UploadPhotoScreen = ({ data }) => {
           </ListItem>
         ))}
       </BottomSheet>
-      <Button title='Navegacion' onPress={() => navigation.replace('BottomNavigation', {
-        displayName: data.displayName,
-        jobTitle: data.jobTitle,
-        mail: data.mail
-      })} />
     </ScrollView>
   );
 };
