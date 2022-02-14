@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Api } from './UrlApi';
+import UrlApi from './UrlApi';
 
 export default axios.create({
-  baseURL: `${Api}/`,
+  baseURL: `${UrlApi.API}/`,
 });

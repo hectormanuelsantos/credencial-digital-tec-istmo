@@ -1,7 +1,9 @@
-import { USERNAME, PASSWORD } from '@env';
+import { USER, PASSWORD, API, CLIENT_ID, CLIENT_SECRET_KEY } from '@env';
 
-const Api = 'https://strapi-credenciales.herokuapp.com';
-const username = 'iticredenciales@gmail.com';
-const password = 'Teciti22';
-
-export { Api, username, password };
+export default {
+  USER,
+  PASSWORD,
+  API,
+  CLIENT_ID,
+  CLIENT_SECRET_KEY,
+};

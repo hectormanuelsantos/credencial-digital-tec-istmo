@@ -1,13 +1,13 @@
 import ApiConfig from './ApiConfig';
-import { Api, username, password } from './UrlApi';
+import UrlApi from './UrlApi';
 
 const apiPostFoto = (uri, ncontrol) => {
   let numero = ncontrol;
   let uriImage = uri;
 
   ApiConfig.post('auth/local', {
-    identifier: username,
-    password: password,
+    identifier: UrlApi.USER,
+    password: UrlApi.PASSWORD,
   })
     .then(res => {
       return res.data;
@@ -31,7 +31,7 @@ const apiPostFoto = (uri, ncontrol) => {
       });
 
       if (user.jwt) {
-        const response = fetch(`${Api}/credenciales`, {
+        const response = fetch(`${UrlApi.API}/credenciales`, {
           method: 'POST',
           body: formData,
           headers: {
