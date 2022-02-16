@@ -10,7 +10,7 @@ import HeaderUploadPhotography from '../components/HeaderUploadPhotography';
 import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
-import { apiPostFoto, apiGetFoto } from '../api/ApiRequest';
+import { apiPostFoto, apiGetFoto, postEstudent, postCredencial } from '../api/ApiRequest';
 
 const UploadPhotoScreen = ({ data }) => {
   const navigation = useNavigation();
@@ -19,21 +19,31 @@ const UploadPhotoScreen = ({ data }) => {
   const [photography, setPhotography] = useState(null);
   const [status, setStatus] = useState(null);
 
-  let control = data.mail.slice(0, 8);
+  let cadena = data.surname;
+  let indice = cadena.indexOf(' ');
+  let cadena2 = cadena.substring(indice);
 
-  apiGetFoto(control, setPhotography, setStatus);
+  let almControl = data.mail.slice(0, 8);
+  let almCurp = 'SALA001205HOCNPLA2';
+  let almEmail = data.mail;
+  let almName = data.givenName;
+  let almFname = cadena.substring(0, indice);
+  let almSname = cadena2.substring(1);
 
-  const onRefresh = () => {
+  /* apiGetFoto(control, setPhotography, setStatus); */
+
+  /*   const onRefresh = () => {
     setTimeout(() => {
       apiGetFoto(control, setPhotography, setStatus);
     }, 1000);
   };
-
+ */
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
 
     if (!result.image.cancelled) {
-      apiPostFoto(result.image, control);
+      /*       apiPostFoto(result.image, control); */
+      postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl);
       /*  onRefresh();
       status === 200 ? redirect() : console.log('Error');*/
     }

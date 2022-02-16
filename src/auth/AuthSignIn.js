@@ -9,6 +9,8 @@ const AuthSignIn = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [data, setData] = useState({
     displayName: '',
+    givenName: '',
+    surname: '',
     jobTitle: '',
     mail: '',
   });
@@ -28,6 +30,8 @@ const AuthSignIn = () => {
       setLoginSuccess(true);
       setData({
         displayName: result.displayName,
+        givenName: result.givenName,
+        surname: result.surname,
         jobTitle: result.jobTitle,
         mail: result.mail,
       });
