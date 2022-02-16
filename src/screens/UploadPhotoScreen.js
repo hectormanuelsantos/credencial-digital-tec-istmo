@@ -10,7 +10,7 @@ import HeaderUploadPhotography from '../components/HeaderUploadPhotography';
 import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
-import { apiPostFoto, apiGetFoto, postEstudent, postCredencial } from '../api/ApiRequest';
+import { postCredencial, getFoto } from '../api/ApiRequest';
 
 const UploadPhotoScreen = ({ data }) => {
   const navigation = useNavigation();
@@ -24,7 +24,7 @@ const UploadPhotoScreen = ({ data }) => {
   let cadena2 = cadena.substring(indice);
 
   let almControl = data.mail.slice(0, 8);
-  let almCurp = 'SALA001205HOCNPLA2';
+  let almCurp = data.officeLocation;
   let almEmail = data.mail;
   let almName = data.givenName;
   let almFname = cadena.substring(0, indice);
@@ -42,8 +42,8 @@ const UploadPhotoScreen = ({ data }) => {
     const result = await loadImageFromGallery([1, 1]);
 
     if (!result.image.cancelled) {
-      /*       apiPostFoto(result.image, control); */
-      postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl);
+      /* postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl); */
+      console.log(getFoto(almCurp));
       /*  onRefresh();
       status === 200 ? redirect() : console.log('Error');*/
     }

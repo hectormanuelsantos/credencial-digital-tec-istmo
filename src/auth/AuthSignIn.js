@@ -8,6 +8,7 @@ import UploadPhotoScreen from '../screens/UploadPhotoScreen';
 const AuthSignIn = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [data, setData] = useState({
+    officeLocation: '',
     displayName: '',
     givenName: '',
     surname: '',
@@ -29,6 +30,7 @@ const AuthSignIn = () => {
       const result = await azureInstance.getUserInfo();
       setLoginSuccess(true);
       setData({
+        officeLocation: result.officeLocation,
         displayName: result.displayName,
         givenName: result.givenName,
         surname: result.surname,

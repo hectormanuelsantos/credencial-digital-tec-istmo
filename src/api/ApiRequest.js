@@ -1,47 +1,6 @@
 import ApiConfig from './ApiConfig';
 import UrlApi from './UrlApi';
 
-const apiPostFoto = (uri, ncontrol) => {
-  let numero = ncontrol;
-  let uriImage = uri;
-
-  ApiConfig.post('auth/local', {
-    identifier: UrlApi.USER,
-    password: UrlApi.PASSWORD,
-  })
-    .then(res => {
-      return res.data;
-    })
-    .then(user => {
-      const formData = new FormData();
-
-      formData.append(
-        'data',
-        JSON.stringify({
-          ncontrol: numero,
-        }),
-      );
-
-      let filename = numero + '-image.jpg';
-
-      formData.append('files.Foto', {
-        uri: uriImage,
-        name: filename,
-        type: 'image/jpeg',
-      });
-
-      if (user.jwt) {
-        const response = fetch(`${UrlApi.API}/credenciales`, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            Authorization: `Bearer ${user.jwt}`,
-          },
-        });
-      }
-    });
-};
-
 const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, almSname, almControl) => {
   try {
     //Primera Peticion
@@ -72,7 +31,6 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
 
     //Tercera Peticion
     const formData = new FormData();
-    let matri = '18190683';
     formData.append(
       'data',
       JSON.stringify({
@@ -84,7 +42,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
 
     let filename = almControl + '-image.jpg';
 
-    formData.append('files.Photography', {
+    formData.append('files.photography', {
       uri: uriImage,
       name: filename,
       type: 'image/jpeg',
@@ -120,20 +78,44 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
   }
 };
 
-const apiGetFoto = async (ncontrol, setPhotografy, setStatus) => {
+const getFoto = async almCurp => {
   try {
-    const foto = await ApiConfig.get(`credenciales?ncontrol=${ncontrol}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const dataAdmin = await ApiConfig.post('admin/login', {
+      email: UrlApi.USER,
+      password: UrlApi.PASSWORD,
     });
 
-    const fotoUrl = await foto.data[0].Foto.url;
-    const fotoStatus = await foto.status;
-
-    setPhotografy(fotoUrl);
-    setStatus(fotoStatus);
-  } catch (error) {}
+    const promise = ApiConfig.get(`user?curp=${almCurp}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${dataAdmin.data.data.token}`,
+      },
+    });
+    const dataPromise = promise.then(response => response.data);
+    return dataPromise;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export { apiPostFoto, apiGetFoto, postCredencial };
+/* 
+const getFoto = async almCurp => {
+  try {
+    const dataAdmin = await ApiConfig.post('admin/login', {
+      email: UrlApi.USER,
+      password: UrlApi.PASSWORD,
+    });
+
+    const fotoData = await ApiConfig.get(`user?curp=${almCurp}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${dataAdmin.data.data.token}`,
+      },
+    });
+    return fotoData.data;
+  } catch (error) {
+    console.log(error);
+  }
+}; */
+
+export { postCredencial, getFoto };
