@@ -29,6 +29,7 @@ const AuthSignIn = () => {
     try {
       const result = await azureInstance.getUserInfo();
       setLoginSuccess(true);
+      console.log(result);
       setData({
         officeLocation: result.officeLocation,
         displayName: result.displayName,
