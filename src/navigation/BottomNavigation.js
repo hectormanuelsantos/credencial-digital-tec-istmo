@@ -28,8 +28,8 @@ const BottomNavigation = ({ route }) => {
   let data = {
     displayName,
     jobTitle,
-    mail
-  }
+    mail,
+  };
 
   return (
     <Tab.Navigator

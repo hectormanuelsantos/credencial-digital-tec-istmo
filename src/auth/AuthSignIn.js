@@ -8,7 +8,10 @@ import UploadPhotoScreen from '../screens/UploadPhotoScreen';
 const AuthSignIn = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [data, setData] = useState({
+    officeLocation: '',
     displayName: '',
+    givenName: '',
+    surname: '',
     jobTitle: '',
     mail: '',
   });
@@ -27,7 +30,10 @@ const AuthSignIn = () => {
       const result = await azureInstance.getUserInfo();
       setLoginSuccess(true);
       setData({
+        officeLocation: result.officeLocation,
         displayName: result.displayName,
+        givenName: result.givenName,
+        surname: result.surname,
         jobTitle: result.jobTitle,
         mail: result.mail,
       });
@@ -39,7 +45,15 @@ const AuthSignIn = () => {
   if (!loginSuccess) {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
-
+  /*   const ade = async () => {
+    setPhotography(await apiGetFoto(control));
+    if (photography) {
+      console.log('de');
+    } else {
+      console.log('false');
+    }
+  };
+  ade(); */
   return <UploadPhotoScreen data={data} />;
 };
 
