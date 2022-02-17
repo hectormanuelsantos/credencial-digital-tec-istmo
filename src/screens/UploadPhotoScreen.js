@@ -38,19 +38,30 @@ const UploadPhotoScreen = ({ data }) => {
     }, 1000);
   };
  */
+  const fotoUrl = async () => {
+    setPhotography(await getFoto(almControl));
+    if (photography) {
+      console.log('Imagen obtenida correctamente');
+      setTimeout(() => {
+        redirect();
+      }, 1000);
+    } else {
+      console.log('Algo salio mal, Intentelo mas tarde');
+    }
+  };
+
   const openImage = async () => {
     const result = await loadImageFromGallery([1, 1]);
 
     if (!result.image.cancelled) {
       /* postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl); */
-      console.log(getFoto(almCurp));
+      fotoUrl();
       /*  onRefresh();
       status === 200 ? redirect() : console.log('Error');*/
     }
   };
 
   const takeImage = async () => {
-    const hasPermission = await askForPermission();
     if (!hasPermission) {
       return;
     } else {

@@ -45,7 +45,15 @@ const AuthSignIn = () => {
   if (!loginSuccess) {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
-
+  /*   const ade = async () => {
+    setPhotography(await apiGetFoto(control));
+    if (photography) {
+      console.log('de');
+    } else {
+      console.log('false');
+    }
+  };
+  ade(); */
   return <UploadPhotoScreen data={data} />;
 };
 
