@@ -11,13 +11,13 @@ import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
 import { postCredencial, getFoto } from '../api/ApiRequest';
+import UrlApi from '../api/UrlApi';
+
 
 const UploadPhotoScreen = ({ data }) => {
   const navigation = useNavigation();
 
   const [isVisible, setIsVisible] = useState(false);
-  const [photography, setPhotography] = useState(null);
-  const [status, setStatus] = useState(null);
 
   let cadena = data.surname;
   let indice = cadena.indexOf(' ');
@@ -30,34 +30,22 @@ const UploadPhotoScreen = ({ data }) => {
   let almFname = cadena.substring(0, indice);
   let almSname = cadena2.substring(1);
 
-  /* apiGetFoto(control, setPhotography, setStatus); */
-
-  /*   const onRefresh = () => {
-    setTimeout(() => {
-      apiGetFoto(control, setPhotography, setStatus);
-    }, 1000);
-  };
- */
-  const fotoUrl = async () => {
-    setPhotography(await getFoto(almControl));
-    if (photography) {
-      console.log('Imagen obtenida correctamente');
-      setTimeout(() => {
-        redirect();
-      }, 1000);
-    } else {
-      console.log('Algo salio mal, Intentelo mas tarde');
-    }
-  };
-
   const openImage = async () => {
-    const result = await loadImageFromGallery([1, 1]);
+    const resultado = await loadImageFromGallery([1, 1]);
 
-    if (!result.image.cancelled) {
-      postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl);
-      fotoUrl();
-      /*  onRefresh();
-      status === 200 ? redirect() : console.log('Error');*/
+    if (!resultado.image.cancelled) {
+      postCredencial(resultado.image, almCurp, almEmail, almName, almFname, almSname, almControl)
+      .then(datos => {
+        let ase = `${UrlApi.API}${datos.photography.url}`;
+        if (ase) {
+              console.log('Imagen obtenida correctamente');
+              setTimeout(() => {
+                redirect(ase);
+              }, 1000);
+            } else {
+              console.log('Algo salio mal, Intentelo mas tarde');
+            }
+      });
     }
   };
 
@@ -80,12 +68,12 @@ const UploadPhotoScreen = ({ data }) => {
     }
   };
 
-  const redirect = () => {
+  const redirect = (foto) => {
     navigation.replace('BottomNavigation', {
       displayName: data.displayName,
       jobTitle: data.jobTitle,
       mail: data.mail,
-      photo: photography,
+      photo: foto,
     });
   };
 

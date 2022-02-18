@@ -5,7 +5,6 @@ import BannerHome from '../components/BannerHome';
 import WelcomeHome from '../components/WelcomeHome';
 
 const HomeScreen = ({ data }) => {
-  console.log(data)
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <StatusBar barStyle='light-content' backgroundColor='#1b396a' />
