@@ -57,7 +57,6 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
     });
 
     const Estudentjson = await dataEstudent.json();
-
     //CuartaPeticion
 
     const dataUserPut = await ApiConfig.put(
@@ -72,6 +71,11 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
       },
     );
 
+      return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve(Estudentjson);
+        }, 2000);
+      });
     /* console.log(dataUserPut); */
   } catch (error) {
     console.log(error);
@@ -92,7 +96,13 @@ const getFoto = async ncontrol => {
     });
 
     const fotoUrl = `${UrlApi.API}${foto.data[0].photography.url}`;
-    return fotoUrl;
+
+    return new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve(fotoUrl);
+      }, 2000);
+    });
+
   } catch (error) {
     console.log(error);
   }
