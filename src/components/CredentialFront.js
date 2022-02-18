@@ -2,16 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import { apiGetFoto } from '../api/ApiRequest';
-
 const CredentialFront = ({ data }) => {
   const [photografy, setphotografy] = useState(null);
-
+console.log('fotoenfron',data.photo)
   let ncontrol = data.mail.slice(0, 8);
-
-  useEffect(() => {
-    apiGetFoto(ncontrol, setphotografy);
-  }, []);
 
   return (
     <View style={styles.containerCredentialFront}>
@@ -19,7 +13,7 @@ const CredentialFront = ({ data }) => {
         <Image style={styles.logoTecNM} source={require('../assets/images/logo-tecnm.png')} />
       </View>
       <View style={styles.containerProfile}>
-        <Image style={styles.photo} source={{ uri: photografy }} />
+        <Image style={styles.photo} source={{ uri: data.photo }} />
       </View>
       <View>
         <Text style={styles.name}>{data.displayName}</Text>
