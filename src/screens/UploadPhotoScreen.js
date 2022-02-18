@@ -54,7 +54,7 @@ const UploadPhotoScreen = ({ data }) => {
     const result = await loadImageFromGallery([1, 1]);
 
     if (!result.image.cancelled) {
-      /* postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl); */
+      postCredencial(result.image, almCurp, almEmail, almName, almFname, almSname, almControl);
       fotoUrl();
       /*  onRefresh();
       status === 200 ? redirect() : console.log('Error');*/
@@ -74,7 +74,8 @@ const UploadPhotoScreen = ({ data }) => {
       });
 
       if (!image.cancelled) {
-        apiPostFoto(image.uri, control);
+        postCredencial(image.uri, almCurp, almEmail, almName, almFname, almSname, almControl);
+        fotoUrl();
       }
     }
   };
