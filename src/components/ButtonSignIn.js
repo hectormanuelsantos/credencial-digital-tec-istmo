@@ -5,7 +5,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 const ButtonSignIn = ({ navigation }) => {
   return (
     <View>
-      <Text style={styles.textHelp}>Ingrese usando su cuenta en:</Text>
+      <Text style={styles.textHelp}>Ingrese usando su cuenta institucional:</Text>
       <TouchableHighlight
         onPress={() => navigation.replace('AuthSignIn')}
         style={styles.buttonMicrosoft}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
+import { ToastProvider } from 'react-native-toast-notifications';
 
 import MainStack from './src/navigation/MainStack';
 
@@ -12,7 +13,11 @@ const App = () => {
 
   if (!loaded) return null;
 
-  return <MainStack />;
+  return (
+    <ToastProvider>
+      <MainStack />
+    </ToastProvider>
+  );
 };
 
 export default App;

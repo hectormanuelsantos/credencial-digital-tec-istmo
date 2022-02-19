@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Toast from './Toast';
 
 const CredentialFront = ({ data }) => {
   return (
@@ -17,6 +18,7 @@ const CredentialFront = ({ data }) => {
         <Text style={styles.subtitle}>{data.mail.slice(0, 8)}</Text>
         <Text style={styles.rolUser}>{data.jobTitle.toUpperCase()}</Text>
       </View>
+      <Toast />
     </View>
   );
 };
