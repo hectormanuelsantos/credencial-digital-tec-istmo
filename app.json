@@ -25,6 +25,19 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": ["CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
-    }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "Tecnm",
+            "project": "tecnm",
+            "authToken": "511f80d89eee4b9e95faecab4e3f84f13ad0980436cf4faebf4c59f87f40e19b"
+          }
+        }
+      ]
+    },
+    "plugins": ["sentry-expo"]
   }
 }
