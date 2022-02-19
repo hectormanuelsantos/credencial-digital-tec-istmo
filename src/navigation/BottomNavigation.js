@@ -23,9 +23,12 @@ const screenOptions = (route, color) => {
 };
 
 const BottomNavigation = ({ route }) => {
-  const { displayName, jobTitle, mail,photo } = route.params;
+  const { officeLocation, givenName, surname, displayName, jobTitle, mail, photo } = route.params;
 
   let data = {
+    officeLocation,
+    givenName,
+    surname,
     displayName,
     jobTitle,
     mail,
