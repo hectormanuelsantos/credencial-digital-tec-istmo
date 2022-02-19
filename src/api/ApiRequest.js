@@ -71,12 +71,11 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
       },
     );
 
-      return new Promise((resolve,reject)=>{
-        setTimeout(() => {
-          resolve(Estudentjson);
-        }, 2000);
-      });
-    /* console.log(dataUserPut); */
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Estudentjson);
+      }, 2000);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -97,12 +96,11 @@ const getFoto = async ncontrol => {
 
     const fotoUrl = `${UrlApi.API}${foto.data[0].photography.url}`;
 
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(fotoUrl);
       }, 2000);
     });
-
   } catch (error) {
     console.log(error);
   }

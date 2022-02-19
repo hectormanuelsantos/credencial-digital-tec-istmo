@@ -10,12 +10,22 @@ import HeaderUploadPhotography from '../components/HeaderUploadPhotography';
 import InstructionsPhoto from '../components/InstructionsPhoto';
 import { loadImageFromGallery, askForPermission } from '../helpers/Permissions';
 import { ButtonCamera, ButtonGallery, ButtonCancel } from '../components/BottomSheet';
-import { postCredencial, getFoto } from '../api/ApiRequest';
+import { postCredencial } from '../api/ApiRequest';
 import UrlApi from '../api/UrlApi';
 
-
-const UploadPhotoScreen = ({ data }) => {
+const UploadPhotoScreen = ({ route }) => {
   const navigation = useNavigation();
+  const { officeLocation, givenName, surname, displayName, jobTitle, mail, photo } = route.params;
+
+  let data = {
+    officeLocation,
+    givenName,
+    surname,
+    displayName,
+    jobTitle,
+    mail,
+    photo,
+  };
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -34,22 +44,22 @@ const UploadPhotoScreen = ({ data }) => {
     const resultado = await loadImageFromGallery([1, 1]);
 
     if (!resultado.image.cancelled) {
-      postCredencial(resultado.image, almCurp, almEmail, almName, almFname, almSname, almControl)
-      .then(datos => {
+      postCredencial(resultado.image, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
         let ase = `${UrlApi.API}${datos.photography.url}`;
         if (ase) {
-              console.log('Imagen obtenida correctamente');
-              setTimeout(() => {
-                redirect(ase);
-              }, 1000);
-            } else {
-              console.log('Algo salio mal, Intentelo mas tarde');
-            }
+          console.log('Imagen obtenida correctamente');
+          setTimeout(() => {
+            redirect(ase);
+          }, 1000);
+        } else {
+          console.log('Algo salio mal, Intentelo mas tarde');
+        }
       });
     }
   };
 
   const takeImage = async () => {
+    const hasPermission = await askForPermission();
     if (!hasPermission) {
       return;
     } else {
@@ -62,23 +72,22 @@ const UploadPhotoScreen = ({ data }) => {
       });
 
       if (!image.cancelled) {
-        postCredencial(image.uri, almCurp, almEmail, almName, almFname, almSname, almControl)
-        .then(datos => {
+        postCredencial(image.uri, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
           let ase = `${UrlApi.API}${datos.photography.url}`;
           if (ase) {
-                console.log('Imagen obtenida correctamente');
-                setTimeout(() => {
-                  redirect(ase);
-                }, 1000);
-              } else {
-                console.log('Algo salio mal, Intentelo mas tarde');
-              }
+            console.log('Imagen obtenida correctamente');
+            setTimeout(() => {
+              redirect(ase);
+            }, 1000);
+          } else {
+            console.log('Algo salio mal, Intentelo mas tarde');
+          }
         });
-      }      
+      }
     }
   };
 
-  const redirect = (foto) => {
+  const redirect = foto => {
     navigation.replace('BottomNavigation', {
       displayName: data.displayName,
       jobTitle: data.jobTitle,

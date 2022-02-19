@@ -7,11 +7,7 @@ const ProfileAccount = ({ data }) => {
   return (
     <ScrollView style={styles.containerContent}>
       <View style={styles.photoProfile}>
-        <Avatar
-          rounded
-          size={160}
-          source={{ uri: data.photo }}
-        />
+        <Avatar rounded size={160} source={{ uri: data.photo }} />
       </View>
       <View>
         <Text style={styles.title}>Nombre Completo</Text>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { AzureInstance, AzureLoginView } from 'expo-react-native-azure-ad-2';
-import UrlApi from '../api/UrlApi';
+import { useNavigation } from '@react-navigation/native';
 
+import UrlApi from '../api/UrlApi';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
-import UploadPhotoScreen from '../screens/UploadPhotoScreen';
-import {getFoto} from '../api/ApiRequest';
+import { getFoto } from '../api/ApiRequest';
 
 const AuthSignIn = () => {
+  const navigation = useNavigation();
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [data, setData] = useState({
     officeLocation: '',
@@ -39,40 +40,44 @@ const AuthSignIn = () => {
         mail: result.mail,
       });
 
-      // let cont = result.mail.slice(0, 8);
-      // console.log(cont)
-      // getFoto(cont)
-      // .then(datos => {
-      //   let ase = datos;
-      //   console.log(ase)
-      //   if (ase) {
-      //         console.log('Imagen obtenida correctamente');
-      //         // setTimeout(() => {
-      //         //   redirect(ase);
-      //         // }, 1000);
-      //       } else {
-      //         console.log('Algo salio mal, Intentelo mas tarde');
-      //       }
-      // });
-      
+      let cont = result.mail.slice(0, 8);
+      getFoto(cont).then(datos => {
+        let ase = datos;
+        if (ase) {
+          redirectBotton(result.displayName, result.jobTitle, result.mail, ase);
+        } else {
+          redirectUpload(result.officeLocation, result.givenName, result.surname, result.displayName, result.jobTitle, result.mail);
+        }
+      });
     } catch (err) {
       console.error(err);
     }
+  };
+  const redirectBotton = (name, job, email, foto) => {
+    navigation.replace('BottomNavigation', {
+      displayName: name,
+      jobTitle: job,
+      mail: email,
+      photo: foto,
+    });
+  };
+
+  const redirectUpload = (curp, nombres, apellidos, name, job, email) => {
+    navigation.replace('UploadPhoto', {
+      officeLocation: curp,
+      givenName: nombres,
+      surname: apellidos,
+      displayName: name,
+      jobTitle: job,
+      mail: email,
+    });
   };
 
   if (!loginSuccess) {
     return <AzureLoginView azureInstance={azureInstance} loadingMessage={<AuthLoadingScreen />} onSuccess={onLoginSuccess} />;
   }
-  /*   const ade = async () => {
-    setPhotography(await apiGetFoto(control));
-    if (photography) {
-      console.log('de');
-    } else {
-      console.log('false');
-    }
-  };
-  ade(); */
-  return <UploadPhotoScreen data={data} />;
+
+  return <AuthLoadingScreen data={data} />;
 };
 
 export default AuthSignIn;

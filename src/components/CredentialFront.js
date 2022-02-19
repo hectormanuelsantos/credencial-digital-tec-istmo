@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const CredentialFront = ({ data }) => {
-  const [photografy, setphotografy] = useState(null);
-console.log('fotoenfron',data.photo)
-  let ncontrol = data.mail.slice(0, 8);
-
   return (
     <View style={styles.containerCredentialFront}>
       <View style={styles.containerLogo}>
