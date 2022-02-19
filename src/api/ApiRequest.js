@@ -3,13 +3,13 @@ import UrlApi from './UrlApi';
 
 const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, almSname, almControl) => {
   try {
-    //Primera Peticion
+    // Primera peticion
     const dataAdmin = await ApiConfig.post('admin/login', {
       email: UrlApi.USER,
       password: UrlApi.PASSWORD,
     });
 
-    //Segunda Peticion
+    // Segunda peticion
     const dataUser = await ApiConfig.post(
       'users',
       {
@@ -29,7 +29,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
       },
     );
 
-    //Tercera Peticion
+    // Tercera peticion
     const formData = new FormData();
     formData.append(
       'data',
@@ -57,8 +57,8 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
     });
 
     const Estudentjson = await dataEstudent.json();
-    //CuartaPeticion
 
+    // Cuarta peticion
     const dataUserPut = await ApiConfig.put(
       `users/${dataUser.data._id}`,
       {
