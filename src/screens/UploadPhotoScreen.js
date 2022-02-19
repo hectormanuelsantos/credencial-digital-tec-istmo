@@ -5,6 +5,7 @@ import { BottomSheet, ListItem } from 'react-native-elements';
 import { launchCameraAsync, MediaTypeOptions } from 'expo-image-picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useToast } from 'react-native-toast-notifications';
 
 import HeaderUploadPhotography from '../components/HeaderUploadPhotography';
 import InstructionsPhoto from '../components/InstructionsPhoto';
@@ -14,6 +15,7 @@ import { postCredencial } from '../api/ApiRequest';
 import UrlApi from '../api/UrlApi';
 
 const UploadPhotoScreen = ({ route }) => {
+  const toast = useToast();
   const navigation = useNavigation();
   const { officeLocation, givenName, surname, displayName, jobTitle, mail, photo } = route.params;
 
@@ -42,17 +44,17 @@ const UploadPhotoScreen = ({ route }) => {
 
   const openImage = async () => {
     const resultado = await loadImageFromGallery([1, 1]);
-
+    let message = toast.show('Subiendo Foto...', {});
     if (!resultado.image.cancelled) {
       postCredencial(resultado.image, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
         let ase = `${UrlApi.API}${datos.photography.url}`;
         if (ase) {
-          console.log('Imagen obtenida correctamente');
+          if (message) toast.update(message, 'Foto subida correctamente', { type: 'success' });
           setTimeout(() => {
             redirect(ase);
           }, 1000);
         } else {
-          console.log('Algo salio mal, Intentelo mas tarde');
+          toast.update(message, 'Algo salio mal , intentalo mas tarde', { type: 'danger' });
         }
       });
     }
@@ -72,15 +74,16 @@ const UploadPhotoScreen = ({ route }) => {
       });
 
       if (!image.cancelled) {
+        let message = toast.show('Subiendo Foto...', {});
         postCredencial(image.uri, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
           let ase = `${UrlApi.API}${datos.photography.url}`;
           if (ase) {
-            console.log('Imagen obtenida correctamente');
+            if (message) toast.update(message, 'Foto subida correctamente', { type: 'success' });
             setTimeout(() => {
               redirect(ase);
             }, 1000);
           } else {
-            console.log('Algo salio mal, Intentelo mas tarde');
+            toast.update(message, 'Algo salio mal , intentalo mas tarde', { type: 'danger' });
           }
         });
       }
