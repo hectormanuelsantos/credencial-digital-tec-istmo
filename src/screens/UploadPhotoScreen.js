@@ -44,8 +44,8 @@ const UploadPhotoScreen = ({ route }) => {
 
   const openImage = async () => {
     const resultado = await loadImageFromGallery([1, 1]);
-    let message = toast.show('Subiendo Foto...', {});
     if (!resultado.image.cancelled) {
+      let message = toast.show('Subiendo Foto...', {});
       postCredencial(resultado.image, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
         let ase = `${UrlApi.API}${datos.photography.url}`;
         if (ase) {
