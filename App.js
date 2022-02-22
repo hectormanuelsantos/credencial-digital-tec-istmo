@@ -6,7 +6,7 @@ import * as Sentry from 'sentry-expo';
 import MainStack from './src/navigation/MainStack';
 
 Sentry.init({
-  dsn: 'https://e2fb5ade8eab4f14bcfb2e78030728ee@o1145928.ingest.sentry.io/6214090',
+  dsn: 'https://5864092441df4f44b02697cce2e3ad0f@o562863.ingest.sentry.io/6214082',
   enableInExpoDevelopment: true,
   debug: true,
 });
