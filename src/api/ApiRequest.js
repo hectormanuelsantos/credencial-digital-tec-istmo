@@ -8,7 +8,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
       email: UrlApi.USER,
       password: UrlApi.PASSWORD,
     });
-
+console.log(dataAdmin.data.data.token)
     // Segunda peticion
     const dataUser = await ApiConfig.post(
       'users',
