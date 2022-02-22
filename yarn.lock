@@ -3143,10 +3143,9 @@ expo-modules-core@~0.4.0, expo-modules-core@~0.4.10, expo-modules-core@~0.4.4:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
-expo-react-native-azure-ad-2@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/expo-react-native-azure-ad-2/-/expo-react-native-azure-ad-2-2.0.2.tgz#def6237d9b2157132bc79675f73e2f09b69998a6"
-  integrity sha512-zYLki7IZ/jd5rIw42sNvMG0spA+3oYzBoQpTHnJtRbw2DhjHMx1HMsd0fpNojhNCSbtnWVDs0m64LGJ6XJybpw==
+expo-react-native-azure-ad-2@Angel-Morales-R/expo-react-native-azure-ad-2#main:
+  version "2.0.1"
+  resolved "https://codeload.github.com/Angel-Morales-R/expo-react-native-azure-ad-2/tar.gz/0ab0786682014c2d6743fa15f3492bc183971806"
   dependencies:
     buffer "^6.0.3"
     react-native-get-random-values "^1.7.0"
