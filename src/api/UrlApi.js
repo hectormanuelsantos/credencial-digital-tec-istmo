@@ -1,4 +1,4 @@
-import { USER, PASSWORD, API, CLIENT_ID, CLIENT_SECRET_KEY } from '@env';
+import { USER, PASSWORD, API, CLIENT_ID, CLIENT_SECRET_KEY, ROLE } from '@env';
 
 export default {
   USER,
@@ -6,4 +6,5 @@ export default {
   API,
   CLIENT_ID,
   CLIENT_SECRET_KEY,
+  ROLE,
 };
