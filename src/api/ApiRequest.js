@@ -94,7 +94,7 @@ const getFoto = async ncontrol => {
       },
     });
 
-    const fotoUrl = `${UrlApi.API}${foto.data[0].photography.url}`;
+    const fotoUrl = foto.data[0].photography.url;
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
