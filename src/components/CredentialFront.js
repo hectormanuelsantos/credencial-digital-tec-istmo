@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const CredentialFront = ({ data }) => {
+  console.log(data.photo);
   return (
     <View style={styles.containerCredentialFront}>
       <View style={styles.containerLogo}>

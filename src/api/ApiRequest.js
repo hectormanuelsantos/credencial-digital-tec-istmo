@@ -21,6 +21,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
         name: almName,
         firstLastName: almFname,
         secondLastName: almSname,
+        role: '6215880f5ac89f001d0af713',
       },
       {
         headers: {
