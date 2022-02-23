@@ -47,7 +47,7 @@ const UploadPhotoScreen = ({ route }) => {
     if (!resultado.image.cancelled) {
       let message = toast.show('Subiendo Foto...', {});
       postCredencial(resultado.image, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
-        let ase = `${UrlApi.API}${datos.photography.url}`;
+        let ase = datos.photography.url;
         if (ase) {
           if (message) toast.update(message, 'Foto subida correctamente', { type: 'success' });
           setTimeout(() => {
@@ -76,7 +76,7 @@ const UploadPhotoScreen = ({ route }) => {
       if (!image.cancelled) {
         let message = toast.show('Subiendo Foto...', {});
         postCredencial(image.uri, almCurp, almEmail, almName, almFname, almSname, almControl).then(datos => {
-          let ase = `${UrlApi.API}${datos.photography.url}`;
+          let ase = datos.photography.url;
           if (ase) {
             if (message) toast.update(message, 'Foto subida correctamente', { type: 'success' });
             setTimeout(() => {

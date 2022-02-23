@@ -1,6 +1,6 @@
 import ApiConfig from './ApiConfig';
 import UrlApi from './UrlApi';
-
+console.log(UrlApi.ROLE);
 const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, almSname, almControl) => {
   try {
     // Primera peticion
@@ -21,6 +21,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
         name: almName,
         firstLastName: almFname,
         secondLastName: almSname,
+        role: UrlApi.ROLE,
       },
       {
         headers: {
