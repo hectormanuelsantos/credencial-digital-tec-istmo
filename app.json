@@ -17,7 +17,11 @@
     "ios": {
       "bundleIdentifier": "mx.tecnm.istmo.idcard",
       "buildNumber": "1.0.0",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Enable Camera Acess so that you can record  Videos",
+        "NSPhotoLibraryUsageDescription": "Enable Camera Roll Access so that you can select Other Videos from Camera Roll"
+      }
     },
     "android": {
       "package": "mx.tecnm.istmo.idcard",
