@@ -5,7 +5,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
   try {
     // Primera peticion
     const dataAdmin = await ApiConfig.post('admin/login', {
-      email: UrlApi.USER,
+      email: UrlApi.USERAPLE,
       password: UrlApi.PASSWORD,
     });
 
@@ -85,7 +85,7 @@ const postCredencial = async (uriImage, almCurp, almEmail, almName, almFname, al
 const getFoto = async ncontrol => {
   try {
     const dataAdmin = await ApiConfig.post('admin/login', {
-      email: UrlApi.USER,
+      email: UrlApi.USERAPLE,
       password: UrlApi.PASSWORD,
     });
 
